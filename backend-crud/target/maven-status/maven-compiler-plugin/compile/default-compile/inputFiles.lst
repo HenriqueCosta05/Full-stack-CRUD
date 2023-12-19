@@ -1,3 +1,4 @@
-/home/henrique/Documents/Everymind/fullstack-crud/src/main/java/edu/henriquebenedictocosta/fullstackcrud/repository/ProductRepository.java
-/home/henrique/Documents/Everymind/fullstack-crud/src/main/java/edu/henriquebenedictocosta/fullstackcrud/FullstackCrudApplication.java
-/home/henrique/Documents/Everymind/fullstack-crud/src/main/java/edu/henriquebenedictocosta/fullstackcrud/model/Product.java
+/home/henrique/Documents/Everymind/backend-crud/src/main/java/edu/henriquebenedictocosta/fullstackcrud/model/Product.java
+/home/henrique/Documents/Everymind/backend-crud/src/main/java/edu/henriquebenedictocosta/fullstackcrud/repository/ProductRepository.java
+/home/henrique/Documents/Everymind/backend-crud/src/main/java/edu/henriquebenedictocosta/fullstackcrud/controller/ProductController.java
+/home/henrique/Documents/Everymind/backend-crud/src/main/java/edu/henriquebenedictocosta/fullstackcrud/FullstackCrudApplication.java
