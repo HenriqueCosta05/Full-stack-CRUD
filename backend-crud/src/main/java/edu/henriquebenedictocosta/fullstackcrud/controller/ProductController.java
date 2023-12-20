@@ -1,5 +1,6 @@
 package edu.henriquebenedictocosta.fullstackcrud.controller;
 
+import edu.henriquebenedictocosta.fullstackcrud.exception.ProductNotFoundException;
 import edu.henriquebenedictocosta.fullstackcrud.model.Product;
 import edu.henriquebenedictocosta.fullstackcrud.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,10 @@ public class ProductController {
     @GetMapping("/produtos")
     List<Product> getAllProducts(){
         return productRepository.findAll();
+    }
+
+    @GetMapping("/produto/{id}")
+    Product getProductById(@PathVariable Long id){
+        return productRepository.findById(id).orElseThrow(()-> new ProductNotFoundException(id));
     }
 }
