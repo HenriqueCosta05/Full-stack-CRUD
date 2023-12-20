@@ -2,6 +2,7 @@ import Table from 'react-bootstrap/Table';
 import axios from "axios";
 import { useState, useEffect} from 'react';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function ResponsiveExample() {
     const [products, setProducts] = useState([]);
@@ -42,9 +43,13 @@ function ResponsiveExample() {
                 <td>{product.description}</td>
                 <td>{product.price_in_cents}</td>
                 <td>
-                    <Button variant="primary">Visualizar</Button>{' '}
-                    <Button variant="outline-primary">Editar</Button>{' '}
-                    <Button variant="danger">Apagar</Button>{' '}
+                    <Button variant="primary">
+                        <Link to={`/produtos/${product.id}`} className='link-light text-decoration-none'>Visualizar</Link>
+                        </Button>{' '}
+                    <Button variant="outline-primary">
+                        <Link to={`/editar-produto/${product.id}`}  className='text-decoration-none'>Editar</Link>
+                    </Button>{' '}
+                    <Button variant="danger" className='link-light text-decoration-none'>Apagar</Button>{' '}
                 </td>
             </tr>
         ))}

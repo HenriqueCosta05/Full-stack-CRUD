@@ -28,4 +28,25 @@ public class ProductController {
     Product getProductById(@PathVariable Long id){
         return productRepository.findById(id).orElseThrow(()-> new ProductNotFoundException(id));
     }
-}
+
+    @PutMapping("/produto/{id}")
+    Product updateProduct(@RequestBody Product newProduct, @PathVariable Long id) {
+        return productRepository.findById(id)
+                .map(product -> {
+                    product.setName(newProduct.getName());
+                    product.setCode(newProduct.getCode());
+                    product.setDescription(newProduct.getDescription());
+                    product.setPrice_in_cents(newProduct.getPrice_in_cents());
+                    return productRepository.save(product);
+                }).orElseThrow(() -> new ProductNotFoundException(id));
+    }
+
+    @DeleteMapping("/produto/{id}")
+    String deleteProduct(@PathVariable Long id){
+        if(!productRepository.existsById(id)){
+            throw new ProductNotFoundException(id);
+        }
+        productRepository.deleteById((id));
+        return "Produto com id " + id + " excluído com sucesso!";
+    }
+    }
