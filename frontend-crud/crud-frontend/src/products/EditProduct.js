@@ -26,7 +26,23 @@ function EditProduct() {
     price: ''
   });
 
-  const { name, code, description, price } = product;
+  const { name, code, description, price_in_cents } = product;
+
+  const handlePriceInput = (input) => {
+  const priceWithoutSymbol = input.replace('R$', '').replace(',', '.');
+
+  // Convert the price to a number
+  const priceNumber = parseFloat(priceWithoutSymbol);
+
+  // Convert the price to cents
+  const priceInCents = Math.round(priceNumber * 100);
+
+  // Set the price in the product object
+  setProduct({ ...product, price_in_cents: priceInCents });
+
+  // Display the full price on the screen
+  setFullPrice(priceNumber.toFixed(2));
+}
 
   const onInputChange = (e) => {
     setProduct({ ...product, [e.target.id]: e.target.value });
@@ -64,9 +80,9 @@ function EditProduct() {
         <Form.Label>Descrição: </Form.Label>
         <Form.Control type="text" placeholder="Digite uma descrição do produto..." value={description} onChange={(e)=>onInputChange(e)} />
       </Form.Group>
-      <Form.Group className="mb-3 mt-5 w-75 m-auto" controlId="price">
+      <Form.Group className="mb-3 mt-5 w-75 m-auto" controlId="price_in_cents">
         <Form.Label>Preço: </Form.Label>
-        <Form.Control type="text" placeholder="Digite o preço do produto..." value={price} onChange={(e)=>onInputChange(e)} required/>
+        <Form.Control type="text" placeholder="Digite o preço do produto..." value={fullPrice} onChange={(e)=>handlePriceInput(e.target.value)} required/>
         </Form.Group>
         <Button variant="danger" className='mt-4 mb-4'>
          <Link to="/" className='link-light text-decoration-none'>Cancelar</Link>
