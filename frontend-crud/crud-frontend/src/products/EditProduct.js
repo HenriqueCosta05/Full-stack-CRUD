@@ -23,30 +23,35 @@ function EditProduct() {
     name: '',
     code: '',
     description: '',
-    price: ''
+    price_in_cents: ''
   });
 
   const { name, code, description, price_in_cents } = product;
 
-  const handlePriceInput = (input) => {
-  const priceWithoutSymbol = input.replace('R$', '').replace(',', '.');
+  const convertPriceToCents = (price_in_cents) => {
+    const priceWithoutSymbol = price_in_cents.replace('R$', '').replace(',', '.');
 
-  // Convert the price to a number
-  const priceNumber = parseFloat(priceWithoutSymbol);
+    if (!isNaN(priceWithoutSymbol)) {
+      const priceInCents = Math.round(parseFloat(priceWithoutSymbol) * 100);
+      return priceInCents;
+      
+    }
+    return 0;
+  }
+    const handlePriceInput = (e) => {
+      const { id, value } = e.target;
 
-  // Convert the price to cents
-  const priceInCents = Math.round(priceNumber * 100);
-
-  // Set the price in the product object
-  setProduct({ ...product, price_in_cents: priceInCents });
-
-  // Display the full price on the screen
-  setFullPrice(priceNumber.toFixed(2));
-}
+      if (id === 'price_in_cents') {
+        const priceInCents = convertPriceToCents(value);
+        setProduct({ ...product, price_in_cents: convertPriceToCents(value) });
+      } else {
+        setProduct({ ...product, [id]: value });
+      }
+    };
 
   const onInputChange = (e) => {
-    setProduct({ ...product, [e.target.id]: e.target.value });
-  }
+      setProduct({ ...product, [e.target.id]: e.target.value });
+  };
     
     useEffect(() => {
         loadProduct();
@@ -54,7 +59,7 @@ function EditProduct() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post(`http://localhost:8080/editar-produto/${id}`, product);
+    await axios.put(`http://localhost:8080/editar-produto/${id}`, product).catch(err => console.log(err));
     navigate("/");
   };
 
@@ -66,7 +71,7 @@ function EditProduct() {
 
   return (
     <>
-    <h1 className='text-center mt-5'>Cadastrar Produto</h1>
+    <h1 className='text-center mt-5'>Editar dados do Produto</h1>
     <Form className='w-50 m-auto mt-5 border shadow' onSubmit={(e)=>onSubmit(e)}>
         <Form.Group className="mb-3 mt-5 w-75 m-auto" controlId="name">
         <Form.Label>Nome: </Form.Label>
@@ -81,14 +86,20 @@ function EditProduct() {
         <Form.Control type="text" placeholder="Digite uma descrição do produto..." value={description} onChange={(e)=>onInputChange(e)} />
       </Form.Group>
       <Form.Group className="mb-3 mt-5 w-75 m-auto" controlId="price_in_cents">
-        <Form.Label>Preço: </Form.Label>
-        <Form.Control type="text" placeholder="Digite o preço do produto..." value={fullPrice} onChange={(e)=>handlePriceInput(e.target.value)} required/>
+          <Form.Label>Preço: </Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Digite o preço do produto..."
+            value={price_in_cents}
+            onChange={(e) => onInputChange(e) && handlePriceInput(e)}
+            required
+          />
         </Form.Group>
         <Button variant="danger" className='mt-4 mb-4'>
          <Link to="/" className='link-light text-decoration-none'>Cancelar</Link>
       </Button>
       <Button variant="primary" type="submit" className='mt-4 mb-4 m-4'>
-        Cadastrar
+        Editar
         </Button>
          
       </Form>

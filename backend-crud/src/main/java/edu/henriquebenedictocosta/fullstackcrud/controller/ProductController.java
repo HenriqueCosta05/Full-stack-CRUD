@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ProductController {
+
     @Autowired
     private ProductRepository productRepository;
 
-    @PostMapping("/produto")
+    @PostMapping("/novo-produto")
     Product newProduct(@RequestBody Product newProduct) {
         return productRepository.save(newProduct);
     }
@@ -29,7 +30,7 @@ public class ProductController {
         return productRepository.findById(id).orElseThrow(()-> new ProductNotFoundException(id));
     }
 
-    @PutMapping("/produto/{id}")
+    @PutMapping("/editar-produto/{id}")
     Product updateProduct(@RequestBody Product newProduct, @PathVariable Long id) {
         return productRepository.findById(id)
                 .map(product -> {
@@ -49,4 +50,4 @@ public class ProductController {
         productRepository.deleteById((id));
         return "Produto com id " + id + " excluído com sucesso!";
     }
-    }
+}
