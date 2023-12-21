@@ -38,7 +38,7 @@ function ResponsiveExample() {
           <p></p>
           <p></p>
 
-          <Table responsive className='border shadow w-75 '>
+          <Table responsive className='border shadow w-75 m-auto'>
     <thead>
         <tr>
             <th>#</th>

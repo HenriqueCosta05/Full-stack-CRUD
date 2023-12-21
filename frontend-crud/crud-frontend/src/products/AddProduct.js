@@ -41,7 +41,7 @@ function AddProduct() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post('http://localhost:8080/produto', product);
+    await axios.post('http://localhost:8080/novo-produto', product);
     navigate('/');
   };
 
