@@ -11,13 +11,13 @@ function ResponsiveExample() {
     }, []);
 
     const loadProducts = async () => {
-        const result = await axios.get("http://localhost:8080/produtos");
+        const result = await axios.get("https://simple-crud-backend.up.railway.app/produtos");
         setProducts(result.data);
         console.log(result.data);
     }
 
     const deleteProduct = async (id) => {
-        await axios.delete(`http://localhost:8080/produto/${id}`);
+        await axios.delete(`https://simple-crud-backend.up.railway.app/produto/${id}`);
         loadProducts();
     }
     //Get the price and separate the cents from the integer 

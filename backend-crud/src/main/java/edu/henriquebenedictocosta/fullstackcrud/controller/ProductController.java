@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "https://produtct-crud.vercel.app/")
+@CrossOrigin(origins = "https://produtct-crud.vercel.app")
 public class ProductController {
 
     @Autowired

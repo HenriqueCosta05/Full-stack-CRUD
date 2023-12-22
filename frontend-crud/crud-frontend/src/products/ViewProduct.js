@@ -19,7 +19,7 @@ function ViewProduct() {
   }, []);
 
   const loadProduct = async () => {
-    const result = await axios.get(`http://localhost:8080/produto/${id}`);
+    const result = await axios.get(`https://simple-crud-backend.up.railway.app/produto/${id}`);
     setProduct(result.data);
   };
 
@@ -28,7 +28,7 @@ function ViewProduct() {
           <h1 className='text-center mt-5'>Visualizar dados do Produto</h1>
 
       <div className="row">
-        <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
+        <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow w-75">
           <div className="card">
             <div className="card-header">
               <ul className="list-group list-group-flush">

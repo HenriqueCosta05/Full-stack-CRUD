@@ -41,14 +41,14 @@ function AddProduct() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post('http://localhost:8080/novo-produto', product);
+    await axios.post('https://simple-crud-backend.up.railway.app/novo-produto', product);
     navigate('/');
   };
 
   return (
     <>
     <h1 className='text-center mt-5'>Cadastrar Produto</h1>
-    <Form className='w-50 m-auto mt-5 border shadow' onSubmit={(e)=>onSubmit(e)}>
+    <Form className='w-75 m-auto mt-5 border shadow ' onSubmit={(e)=>onSubmit(e)}>
         <Form.Group className="mb-3 mt-5 w-75 m-auto" controlId="name">
         <Form.Label>Nome: </Form.Label>
         <Form.Control type="text" placeholder="Digite o nome do produto..." value={name} onChange={(e)=>onInputChange(e)} required/>
